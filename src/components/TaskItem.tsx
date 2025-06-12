@@ -48,7 +48,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
                 : 'bg-blue-100 text-blue-800'
             }`}
           >
-            Impact: {task.impact}
+            Impacto: {task.impact}
           </div>
         </div>
       </div>
@@ -64,7 +64,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ task }) => {
         </div>
       )}
       
-      <style jsx>{`
+      <style>{`
         @keyframes leaf-float {
           0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
           50% { opacity: 1; }

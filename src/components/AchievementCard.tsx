@@ -8,9 +8,9 @@ interface AchievementCardProps {
 }
 
 const AchievementCard: React.FC<AchievementCardProps> = ({ achievement }) => {
-  // Dynamic icon rendering
+  
   const renderIcon = (iconName: string) => {
-    const Icon = (LucideIcons as Record<string, React.FC<{ className?: string }>>)[iconName];
+    const Icon = ((LucideIcons as unknown) as Record<string, React.FC<{ className?: string }>>)[iconName];
     return Icon ? (
       <Icon className={`h-8 w-8 ${achievement.unlocked ? 'text-yellow-500' : 'text-gray-400'}`} />
     ) : null;

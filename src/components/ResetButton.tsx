@@ -7,7 +7,7 @@ const ResetButton: React.FC = () => {
   const [isResetting, setIsResetting] = useState(false);
   
   const handleReset = () => {
-    if (window.confirm('Are you sure you want to reset all tasks? This will mark all tasks as incomplete.')) {
+    if (window.confirm('Tem certeza de que deseja redefinir todas as tarefas? Isso marcará todas as tarefas como incompletas.')) {
       setIsResetting(true);
       setTimeout(() => {
         resetDailyTasks();
@@ -25,7 +25,7 @@ const ResetButton: React.FC = () => {
       disabled={isResetting}
     >
       <RefreshCw className={`h-4 w-4 ${isResetting ? 'animate-spin' : ''}`} />
-      Reset Tasks
+      Redefinir Tarefas
     </button>
   );
 };

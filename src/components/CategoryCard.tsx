@@ -12,9 +12,8 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, onClick }) => {
   const { getCategoryCompletionPercentage } = useTasks();
   const completionPercentage = getCategoryCompletionPercentage(category.id);
   
-  // Dynamic icon rendering
   const renderIcon = (iconName: string) => {
-    const Icon = (LucideIcons as Record<string, React.FC<{ className?: string }>>)[iconName];
+    const Icon = ((LucideIcons as unknown) as Record<string, React.FC<{ className?: string }>>)[iconName];
     return Icon ? (
       <Icon className="h-10 w-10 text-white" />
     ) : null;

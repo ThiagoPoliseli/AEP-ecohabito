@@ -18,7 +18,7 @@ const TasksPage: React.FC = () => {
   const filteredTasks = tasks.filter(task => {
     const matchesCategory = activeCategory ? task.category === activeCategory : true;
     const matchesSearch = task.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                           task.description.toLowerCase().includes(searchQuery.toLowerCase());
+                          task.description.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
 
@@ -43,7 +43,7 @@ const TasksPage: React.FC = () => {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search tasks..."
+              placeholder="Pesquisar tarefas..."
               className="py-2 pl-10 pr-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent w-full sm:w-64"
             />
           </div>
@@ -77,7 +77,7 @@ const TasksPage: React.FC = () => {
         </div>
       ) : (
         <div className="text-center py-10">
-          <p className="text-gray-500">No tasks match your criteria. Try changing your filters.</p>
+          <p className="text-gray-500">Nenhuma tarefa corresponde aos seus critérios. Tente alterar seus filtros.</p>
         </div>
       )}
     </div>

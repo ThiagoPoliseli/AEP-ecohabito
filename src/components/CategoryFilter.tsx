@@ -13,15 +13,14 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
 }) => {
   const handleCategoryClick = (categoryId: string) => {
     if (activeCategory === categoryId) {
-      setActiveCategory(null); // Toggle off if already active
+      setActiveCategory(null);
     } else {
       setActiveCategory(categoryId);
     }
   };
 
-  // Dynamic icon rendering
   const renderIcon = (iconName: string) => {
-    const Icon = (LucideIcons as Record<string, React.FC<{ className?: string }>>)[iconName];
+    const Icon = (LucideIcons as unknown as Record<string, React.FC<{ className?: string }>>)[iconName];
     return Icon ? <Icon className="h-5 w-5" /> : null;
   };
 
@@ -35,7 +34,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
         }`}
         onClick={() => setActiveCategory(null)}
       >
-        All Tasks
+        Todas as tarefas
       </button>
       
       {categories.map((category) => (

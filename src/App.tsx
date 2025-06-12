@@ -10,7 +10,7 @@ function App() {
 
   const renderContent = () => {
     switch (activeTab) {
-      case 'tasks':
+      case 'tarefas':
         return <TasksPage />;
       case 'achievements':
         return <AchievementsPage />;
