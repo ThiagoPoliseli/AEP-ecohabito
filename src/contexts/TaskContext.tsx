@@ -26,13 +26,24 @@ export const TaskProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   });
 
   useEffect(() => {
+    if (tasks.length !== initialTasks.length) {
+      setTasks(initialTasks); 
+    }
+  }, [tasks, setTasks, initialTasks.length]);
+
+  const resetDailyTasks = React.useCallback(() => {
+    setTasks(prevTasks => 
+      prevTasks.map(task => ({ ...task, completed: false }))
+    );
+  }, [setTasks]);
+
+  useEffect(() => {
     const today = new Date().toDateString();
     
     if (stats.lastCompletedDate && stats.lastCompletedDate !== today) {
-      
       resetDailyTasks();
     }
-  }, [stats.lastCompletedDate]);
+  }, [stats.lastCompletedDate, resetDailyTasks]);
 
   const getCompletionPercentage = (): number => {
     if (tasks.length === 0) return 0;
@@ -43,7 +54,6 @@ export const TaskProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const getCategoryCompletionPercentage = (category: string): number => {
     const categoryTasks = tasks.filter(task => task.category === category);
     if (categoryTasks.length === 0) return 0;
-    
     const completedCount = categoryTasks.filter(task => task.completed).length;
     return Math.round((completedCount / categoryTasks.length) * 100);
   };
@@ -69,17 +79,14 @@ export const TaskProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         
         if (prev.lastCompletedDate !== today) {
           if (prev.lastCompletedDate === new Date(Date.now() - 86400000).toDateString()) {
-            
             newStats.streak += 1;
           } else {
-          
             newStats.streak = 1;
           }
         }
         
         newStats.lastCompletedDate = today;
       } else {
-        
         newStats.tasksCompleted = Math.max(0, newStats.tasksCompleted - 1);
         newStats.impactScore = Math.max(0, newStats.impactScore - 10);
       }
@@ -88,12 +95,6 @@ export const TaskProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     });
     
     updateAchievements();
-  };
-
-  const resetDailyTasks = () => {
-    setTasks(prevTasks => 
-      prevTasks.map(task => ({ ...task, completed: false }))
-    );
   };
 
   const updateAchievements = () => {
